@@ -18,11 +18,19 @@ class EmotionsViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationViewController = segue.destination
-        if let faceViewController = destinationViewController as? FaceViewController,
+        var destinationController = segue.destination
+        
+        //if we have a navigationController receiver instead of just ViewController
+        if let navigationController = destinationController as? UINavigationController {
+            //shows visible cart in stack of controller
+            destinationController = navigationController.visibleViewController ?? destinationController
+        }
+        
+        if let faceViewController = destinationController as? FaceViewController,
             let identifier = segue.identifier,
             let expression = emotionalFaces[identifier] {
-            faceViewController.expression = expression
+                faceViewController.expression = expression
+                faceViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
         }
     }
     
