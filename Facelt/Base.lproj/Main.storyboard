@@ -25,6 +25,7 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="a4T-VO-3AU" customClass="FaceView" customModule="Facelt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="981" height="1024"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="scale">
                                         <real key="value" value="0.90000000000000002"/>
@@ -37,6 +38,9 @@
                                         <real key="value" value="0.59999999999999998"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="1kc-J0-QM7" appends="YES" id="7iH-HZ-M7M"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,6 +57,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1kc-J0-QM7">
+                    <connections>
+                        <action selector="shakeHead:" destination="BYZ-38-t0r" id="kXF-0O-HRP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1878" y="-261"/>
         </scene>
