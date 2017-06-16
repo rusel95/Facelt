@@ -132,7 +132,9 @@
                     <navigationItem key="navigationItem" title="Emotions" id="unB-lO-ZaE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="caD-aI-ztP">
                             <connections>
-                                <segue destination="rwt-0t-tmc" kind="presentation" id="r59-BP-cIL"/>
+                                <segue destination="rwt-0t-tmc" kind="popoverPresentation" popoverAnchorBarButtonItem="caD-aI-ztP" id="r59-BP-cIL">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
