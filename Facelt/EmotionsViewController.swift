@@ -8,12 +8,38 @@
 
 import UIKit
 
-class EmotionsViewController: VCLLoggingViewController {
+class EmotionsViewController: UITableViewController {
+    
+    private var emotionalFaces: [(name: String, expression: FacialExpression)] = [
+        ("Sad", FacialExpression(eyes: .closed, mouth: .frown) ),
+        ("Happy", FacialExpression(eyes: .open, mouth: .smile) ),
+        ("Worried", FacialExpression(eyes: .open, mouth: .smirk) )
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func addEmotionalFace(from segue: UIStoryboardSegue) {
+        if let editor = segue.source as? ExpressionEditorViewController {
+            emotionalFaces.append((editor.name, editor.expression))
+            tableView.reloadData()
+        }
+    }
+    
+    
+    //MARL: UITableViewDataSource
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return emotionalFaces.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Emotion Cell", for: indexPath)
+        cell.textLabel?.text = emotionalFaces[indexPath.row].name
+        return cell
     }
     
     // MARK: - Navigation
@@ -27,16 +53,12 @@ class EmotionsViewController: VCLLoggingViewController {
         }
         
         if let faceViewController = destinationController as? FaceViewController,
-            let identifier = segue.identifier,
-            let expression = emotionalFaces[identifier] {
-                faceViewController.expression = expression
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell ) {
+                faceViewController.expression = emotionalFaces[indexPath.row].expression
                 faceViewController.navigationItem.title = (sender as? UIButton)?.currentTitle
         }
     }
     
-    private let emotionalFaces: Dictionary<String,FacialExpression> = [
-        "sad" : FacialExpression(eyes: .closed, mouth: .frown),
-        "happy" : FacialExpression(eyes: .open, mouth: .smile),
-        "worried" : FacialExpression(eyes: .open, mouth: .smirk)
-    ]
+
 }
